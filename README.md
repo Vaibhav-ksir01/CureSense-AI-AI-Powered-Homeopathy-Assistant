@@ -50,7 +50,7 @@ NEO4J_DATABASE=your_database_name
 ```bash
 jupyter notebook
 ```
-Open `space.ipynb` and run the cells in order.
+Open `QA-KG-RAG.ipynb` and run the cells in order.
 
 ## Usage
 - Enter a topic to train the model.
