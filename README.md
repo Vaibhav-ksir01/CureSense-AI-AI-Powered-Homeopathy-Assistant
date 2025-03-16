@@ -1,21 +1,22 @@
-# QA Model using Knowledge Graph and RAG
+# Intellex: AI-Powered Knowledge Assistant
 
-This project demonstrates a **Retrieval-Augmented Generation (RAG) model** using **Neo4j as a knowledge graph** and **LangChain** for intelligent query handling. The model allows users to extract insights from structured and unstructured data sources, including Wikipedia and PDF documents.
+This project demonstrates a **versatile AI chatbot** using **Retrieval-Augmented Generation (RAG)** and **Neo4j as a Knowledge Graph**, built with **LangChain** and **OpenAI LLMs**. The model efficiently retrieves, structures, and understands domain-specific data for **accurate, context-aware responses**. It is scalable for various applications, including **education, finance, healthcare, legal, research, and enterprise use**.
 
 ## Features
-- **Knowledge Graph** integration with **Neo4j**
-- **Multi-source document ingestion** (Wikipedia, PDFs)
-- **LangChain-powered RAG implementation**
-- **GPT-3.5-turbo for conversational AI**
+- **Knowledge Graph** integration with **Neo4j** for structured data storage
+- **PDF-based document ingestion** (Processes multiple PDFs stored in a folder)
+- **LangChain-powered RAG implementation** for enhanced retrieval
+- **OpenAI LLMs (GPT-4/GPT-3.5-turbo) for intelligent query handling**
 - **Token-based document splitting** for efficient processing
+- **Graph visualization using yFiles Jupyter Graphs**
 - **Environment variable-based credential handling**
 
 ## Installation
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/Vaibhav-ksir01/QA-Application-Using-Knowledge-Graph-and-RAG.git
-cd QA-Application-Using-Knowledge-Graph-and-RAG
+git clone https://github.com/Vaibhav-ksir01/Intellex-AI-Powered-Knowledge-Assistant.git
+cd Intellex-AI-Powered-Knowledge-Assistant
 ```
 
 ### 2. Install Dependencies
@@ -50,13 +51,20 @@ NEO4J_DATABASE=your_database_name
 ```bash
 jupyter notebook
 ```
-Open `QA-KG-RAG.ipynb` and run the cells in order.
+Open `QA_KG_RAG.ipynb` and run the cells in order.
 
 ## Usage
-- Enter a topic to train the model.
-- The model fetches **Wikipedia articles** and/or **PDF content**.
-- **Chunk-based text processing** is applied for efficient indexing.
-- Neo4j stores structured knowledge for better retrieval.
+- Store multiple **PDFs** in a specified folder.
+- The system processes and indexes the PDFs into a **Neo4j Knowledge Graph**.
+- **Graph-based AI retrieval** enhances accuracy and structure in responses.
+- Query the system, and **OpenAI LLMs** generate precise, context-aware answers.
+- **Graph visualization** provides insights into relationships within the data.
 
 ## Contributions
 Feel free to contribute via pull requests.
+
+## Future Enhancements
+- **Integration of Agentic AI** for autonomous reasoning and workflow automation.
+- **Support for real-time data ingestion and knowledge updates.**
+- **Enhancing multi-modal retrieval (images, videos, and structured databases).**
+
