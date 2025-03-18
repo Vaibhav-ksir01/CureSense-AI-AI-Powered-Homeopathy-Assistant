@@ -9,4 +9,3 @@ tiktoken
 yfiles_jupyter_graphs 
 pypdf
 pydantic
-glob
