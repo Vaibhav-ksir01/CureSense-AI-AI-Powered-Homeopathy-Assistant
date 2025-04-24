@@ -29,5 +29,5 @@ def load_pdfs_from_folder(folder_path: str) -> dict:
       folder_dict[subfolder] = documents
   return folder_dict
 
-folder_path = "/home/vaibhavksir01/Downloads/project/Knowledge Graph/Class 6 textbooks"
+folder_path = #[Enter folder path here]
 raw_document = load_pdfs_from_folder(folder_path)
