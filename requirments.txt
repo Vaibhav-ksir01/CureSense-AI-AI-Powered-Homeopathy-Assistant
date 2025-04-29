@@ -14,7 +14,4 @@ pypdf
 langchain_neo4j
 langchain_experimental
 langchain_openai
-asyncio
-glob
-os
 pyvis
