@@ -15,11 +15,12 @@ async def main():
 
         retrival_task = f"question:{user_question}"
         async for result in retrival_team.run_stream(task=retrival_task):
+            fp.write(f"\nRetrival Agent Output\n{result}\n")
             retrival_response = []
             if hasattr(result, 'messages') and hasattr(result.messages[-2], 'content'):
                 response = str(result.messages[-2].content).replace("Retrival:", "").replace("'","").replace("\n","").replace("[","").replace("]","").replace("Retrieval:","").replace('"','').replace(",","").replace(r':\\','')
                 retrival_response.extend(response.strip(",").split())
-                fp.write(f"list with Duplicate Elements: \n{retrival_response}\n")
+                fp.write(f"\nlist with Duplicate Elements: \n{retrival_response}\n")
                 for i in range(len(retrival_response)):
                     x=''
                     for w in retrival_response[i]:
@@ -31,6 +32,14 @@ async def main():
                         retrival_response[i]=x
                 retrival_response = list(set(retrival_response))
                 cleaned_list = [s.strip() for s in retrival_response]
+                cleaned_list = [item for element in cleaned_list for item in element.split()]
+                for element in cleaned_list:
+                    try:
+                        if int(element):
+                            cleaned_list.remove(element)
+                    except:
+                        continue
+                cleaned_list = list(set(cleaned_list))
                 fp.write(f"\nWords retrived:\n{cleaned_list}\n")
 
         from retrieval import retrieve_knowledge
