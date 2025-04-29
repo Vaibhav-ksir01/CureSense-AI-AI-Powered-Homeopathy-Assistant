@@ -13,7 +13,7 @@ client = AzureOpenAIChatCompletionClient(
     api_key=AZURE_API_KEY
 )
 
-# Define Agents
+# Define Chat Agents
 planning_agent = AssistantAgent(
     "PlanningAgent",
     model_client=client,
@@ -31,14 +31,6 @@ planning_agent = AssistantAgent(
         - Formule: Formats mathematical or chemical equations using standard notation and returns the result to the Editor.
         - Approval: Reviews and approves the final content if it meets all requirements, responding with 'APPROVED'.
 
-    Assign task as:
-        - Agent : sub-task
-
-    When a task arrives:
-        - You will first determine which agents should handle the sub-tasks.
-        - Once an agent completes its sub-tasks, you will collect and consolidate the result.
-        - After gathering all the necessary data, send it to another agent for further processing or approval, depending on the task's nature.
-    
     You should ensure that tasks are efficiently assigned to the appropriate agents, taking into account:
         - For question generation: Adjust difficulty based on the assigned marks.
         - For topic explanations: Provide a simple, effective explanation with key points, fun facts, and jokes to keep it interesting.
@@ -54,7 +46,7 @@ Analyzer = AssistantAgent(
     system_message="""
     Your job is to analyze the user's question and accurately determine their intent. 
     You need to extract important information and categorize the request to help the team decide the next steps.
-    - If the user is asking for an explanation, determine the complexity level.
+    - If the user is asking for an explanation, determine the key points and concepts to cover.
     - If the user is asking for a question generation, assess the difficulty based on the marks.
     Provide a precise interpretation to help guide the delegation of tasks to the appropriate agents.
     """
@@ -66,7 +58,11 @@ Editor = AssistantAgent(
     system_message="""
     Your responsibility is to edit and simplify the content to ensure that it is clear and easy to understand for a 6th-grade student.
     If the content needs to be revised or simplified, you should adjust the language accordingly.
-    Focus on clarity, simplicity, and appropriateness for a younger audience, avoiding jargon and complex terminology.
+    Focus on clarity, simplicity, and appropriateness for a younger audience, avoiding complex terminology.
+
+    You should ensure that the content is engaging and informative, while also being suitable for the target age group, taking into account:
+        - For question generation: Adjust difficulty based on the assigned marks.
+        - For topic explanations: Provide a simple, effective explanation with key points, fun facts, to keep it interesting.
     """
 )
 
@@ -92,25 +88,35 @@ Approval = AssistantAgent(
     """
 )
 
-Retrival_Analyzer = AssistantAgent(
-    "Analyzer", 
-    model_client=client, 
-    system_message="Analyze the question to determine the user's intent."
-    )
-
-Retrival_agent = AssistantAgent(
-    "Retrival",
-    model_client=client,
-    system_message="Extract what words or phrases to be searched in the database from the question and return a list of words to be searched."
-    )
-
-# Define Team
 termination = TextMentionTermination("APPROVED") | MaxMessageTermination(20)
 team = SelectorGroupChat(
     [planning_agent, Analyzer,Editor,Formule,Approval], 
     model_client=client, 
     termination_condition=termination
     )
+
+
+
+# Define Intent Agents
+Retrival_Analyzer = AssistantAgent(
+    "Analyzer", 
+    model_client=client, 
+    system_message="""
+    Your role is to analyze the user's question to accurately determine their intent.
+    Break down the question to identify key components and clarify the user's requirements.
+    Provide a concise and clear interpretation to guide the retrieval process effectively.
+    """
+)
+
+Retrival_agent = AssistantAgent(
+    "Retrival",
+    model_client=client,
+    system_message="""
+    Your responsibility is to extract relevant keywords or phrases from the user's question 
+    that can be used for database searches. Focus on identifying terms that are most likely 
+    to yield accurate and useful results. Return a clear and concise list of these keywords.
+    """
+)
 
 retrival_termination = MaxMessageTermination(5)
 retrival_team = SelectorGroupChat(
