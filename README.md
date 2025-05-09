@@ -1,4 +1,4 @@
-# Intellex: AI-Powered Knowledge Assistant
+# CureSense-AI-AI-Powered-Homeopathy-Assistant
 
 **Intellex** is an AI-powered assistant that transforms unstructured PDFs into structured **Neo4j Knowledge Graphs**, enabling intelligent, contextual question answering. It combines **Autogen Agents**, **LangChain's Retrieval-Augmented Generation (RAG)**, and **OpenAI/Azure OpenAI LLMs** for advanced reasoning, querying, and answering with graph-enhanced knowledge.
 
