@@ -21,8 +21,8 @@
 ### 1. Clone the Repository
 
 ```
-git clone https://github.com/Vaibhav-ksir01/Intellex-AI-Powered-Knowledge-Assistant.git
-cd Intellex-AI-Powered-Knowledge-Assistant
+git clone https://github.com/Vaibhav-ksir01/CureSenseAI-AI-Powered-Homeopathy-Assistant
+cd CureSenseAI-AI-Powered-Homeopathy-Assistant
 ```
 
 ### 2. Install Dependencies
